@@ -262,12 +262,14 @@ namespace pryAliagaMatias
                     conn.Open();
 
                     string query = @"
-                        SELECT CategoriaAlimentos.Nombre AS Categoria, 
+                        SELECT TOP 10 CategoriaAlimentos.Nombre AS Categoria, 
                                SUM(Ventas.Cantidad) AS TotalCantidad
                         FROM (Ventas
                               INNER JOIN Productos ON Ventas.Id = Productos.Id)
                         INNER JOIN CategoriaAlimentos ON Productos.TipoAlimento = CategoriaAlimentos.Nombre
-                        GROUP BY CategoriaAlimentos.Nombre";
+                        GROUP BY CategoriaAlimentos.Nombre
+                        ORDER BY SUM(Ventas.Cantidad) DESC";
+                        
 
                     using (OleDbCommand cmd = new OleDbCommand(query, conn))
                     using (OleDbDataReader reader = cmd.ExecuteReader())

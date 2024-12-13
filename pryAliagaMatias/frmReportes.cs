@@ -38,5 +38,6 @@ namespace pryAliagaMatias
     {
        pr.ObtenerDatosCategoria(chtTipoProd);
     }
-  }
+
+    }
 }
